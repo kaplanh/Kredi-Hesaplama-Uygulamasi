@@ -1,6 +1,6 @@
 # Kredi Hesaplama Araci
 
-![DOM example](https://github.com/kaplanh/Dom-Example/assets/101884444/6daeae24-55bd-47e2-adb3-85c89d9af223)
+![DOM example](![kredi hesaplama araci](https://github.com/kaplanh/Kredi-Hesaplama-Uygulamasi/assets/101884444/a24bb7a7-d960-4615-994e-8926818d4dac))
 
 
 [Click Me!](https://kaplanh.github.io/Kredi-Hesaplama-Uygulamasi/)
