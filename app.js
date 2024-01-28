@@ -60,3 +60,5 @@ const sonuclariGoster = () => {
 </table>
  `;
 };
+
+
