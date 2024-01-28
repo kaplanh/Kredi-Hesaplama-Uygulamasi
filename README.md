@@ -1,17 +1,17 @@
-# DOM Example
+# Kredi Hesaplama Araci
 
 ![DOM example](https://github.com/kaplanh/Dom-Example/assets/101884444/6daeae24-55bd-47e2-adb3-85c89d9af223)
 
 
-[Click Me!](https://kaplanh.github.io/Dom-Example/)
+[Click Me!](https://kaplanh.github.io/Kredi-Hesaplama-Uygulamasi/)
 
 ## Description
 
-The project aims to create a DOM Example using JS and Bootstrap.
+The project aims to create a Credit Calculator using JS and Bootstrap.
 
 ## Problem Statement
 
-- Your company has recently started on a project that aims to create a Languages Application. So you and your colleagues have started to work on the project.
+- Your company has recently started on a project that aims to create a Credit Calculator. So you and your colleagues have started to work on the project.
 
 ## Project Skeleton 
 
@@ -20,33 +20,29 @@ Monthly Expense Tracking Application (folder)
 |
 |----readme.md                        
 |----index.html  
-|----style.css
 |----app.js
 ``` 
 
 
-### At the end of the project, following topics are to be covered;
+### At the end of the project, the following topics are to be covered;
 
 - HTML
+  - select input 
    ```
-   - for Bootstrap cdnjs link & script
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-            crossorigin="anonymous"
-        />
-   <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-      crossorigin="anonymous"
-    ></script>
+    <label for="select">Kredi:</label>
+        
+        <select id="select" class="form-select mb-3 mt-2">
+          <option value="" selected>Seciniz</option>
+          <option value="Konut Kredisi">Konut Kredisi</option>
+          <option value="Ihtiyac Kredisi">Ihtiyac Kredisi</option>
+          <option value="Arac Kredisi">Arac Kredisi</option>
+        </select>
    
    ```
  
-- CSS
-  
 -Bootstrap
+ - Bootstrap form
+ - Bootstrap table
  - Bootstrap flex
  - Bootstrap btn
  - Bootstrap text
@@ -54,101 +50,88 @@ Monthly Expense Tracking Application (folder)
   
 - JS
   - DOM Manipulations
-    - createElement()
+    - innerHTML
       ```
-      const ul = document.createElement("ul")
-      ```
-    - appendChild()
-      ```
-      dilSection.appendChild(ul);
-      ```
-    - closest()
-      ```
-      const h1 = ul.closest(".container").firstElementChild
-      const buttons = ul.closest(".container").querySelectorAll(".btn")
-      ```
-      
-      ```
+      sonuclar.innerHTML = `
+        <h2 class="mt-3 text-warning">Kredi Bilgileri</h2>
+        <table class="table table-bordered border-warning mt-4">
+         <tbody>
+          <tr>
+            <th>Kredi Miktari</th>
+            <td>${tutar.value} ₺</td>
+            <th>Kredi Tipi</th>
+            <td>${select.value}</td>
+          </tr>
+          <tr>
+            <th>Vade</th>
+            <td>${vade.value}</td>
+            <th>Faiz Orani</th>
+            <td>${oran}</td>
+          </tr>
+          <tr>
+            <th>Toplam Tutar</th>
+            <td>${(taksit * vade.value).toFixed(2)} ₺</td>
+            <th>Taksit Tutari</th>
+            <td>${taksit.toFixed(2)} ₺</td>
+          </tr>
+        </tbody>
+      </table>
+       `;
       ```
      
   - DOM Selectors
     
-    ```
-     const dilInput = document.querySelector(".diller");
-     const silBtn = document.getElementById("sil");
-     const buttons = document.querySelectorAll(".btn");
-    
-    ```
   - Events
     - click
-    - keydown
-    - load 
     ```
-    silBtn.onclick = function () {
-    ul.childElementCount > 0
-        ? ul.removeChild(ul.lastElementChild)
-        : alert("Silinecek dil kalmadi");
-    };
-    
-    dilInput.addEventListener("keydown", (e) => {
-    // console.log(e);
-    if (e.keyCode === 13) {
-        ekleBtn.onclick();
-    }
-    // if (e.code === 'Enter') {
-    //   ekleBtn.onclick();
-    // }
-    if (e.code === "Delete") {
-        silBtn.onclick();
-    }
-    });
-
-    window.onload = () => {
-    javascriptKontrol();
-    dilInput.focus();
-    };
+          hesaplaBtn.addEventListener('click', (e) => {
+        //? preventDefault() event'ın default davranışı (submit etmek ve formu silmek) engeller
+        e.preventDefault();
+        if (select.value === 'Konut Kredisi') {
+          oran = 1.29;
+        } else if (select.value === 'Ihtiyac Kredisi') {
+          oran = 1.99;
+        } else if (select.value === 'Arac Kredisi') {
+          oran = 1.79;
+        }
+        if (!select.value || !vade.value || !tutar.value) {
+          alert('Lutfen Kredi turu, Vade ve tutari giriniz');
+        }
+      
+        const faiz = oran / 100;
+        taksit =
+          (tutar.value * (faiz * (1 + faiz) ** vade.value)) /
+          ((1 + faiz) ** vade.value - 1);
+      
+        // console.log(taksit);
+        sonuclariGoster();
+      });
     
     ```
   - Builtin functions
      - preventDefault()
-     - reset()
-     - remove()  
+  
   - if else - if - else conditions
-  - Ternary & removeChild()
-      ```
-      silBtn.onclick = function () {
-    ul.childElementCount > 0
-        ? ul.removeChild(ul.lastElementChild)
-        : alert("Silinecek dil kalmadi");
-                                 };
-      ```
+ 
+     
 
-  - Array Methods( forEach() ) & setAtribute()
+  - String Methods( toFixed() )
    ```
-    const javascriptKontrol = () => {
-    document.querySelectorAll("ul li").forEach((dil) => {
-        const kucukHarf = dil.textContent.toLowerCase();
-        if (kucukHarf === "javascript") {
-            // dil.className = 'red';
-            //?Alternatif yöntem
-            dil.setAttribute("class", "red");
-        }
-    });
-                                 };
- ```
+   <td>${(taksit * vade.value).toFixed(2)} ₺</td>
+  ```
 
     
 
 ### At the end of the project, developers will be able to;
 
-- improve coding skills within HTML, CSS and JS 
+- improve coding skills within HTML, Bootstrap and JS 
 
 - use git commands (push, pull, commit, add etc.) and Github as a Version Control System.
 
 
 ## Notes
 
-- You can use HTML, CSS, Bootstrap and JS to complete this project.
+- You can use HTML, Bootstrap and JS to complete this project.
 
 
 
