@@ -1,7 +1,4 @@
 
-
-
-console.log('**** Kredi Hesaplama *******');
 const select = document.querySelector('.form-select');
 const vade = document.querySelector('#vade');
 const tutar = document.querySelector('#tutar');
